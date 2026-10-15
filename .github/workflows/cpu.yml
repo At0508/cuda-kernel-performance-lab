@@ -29,7 +29,7 @@ jobs:
           /opt/ci-tools/bin/pip install cmake==3.31.6 ninja
       - name: Compile CUDA and NVBench without a GPU
         run: |
-          /opt/ci-tools/bin/cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=75 -DCUDA_BACKEND=ON -DENABLE_NVBENCH=ON
+          /opt/ci-tools/bin/cmake -S . -B build -G Ninja -DCMAKE_MAKE_PROGRAM=/opt/ci-tools/bin/ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=75 -DCUDA_BACKEND=ON -DENABLE_NVBENCH=ON
           /opt/ci-tools/bin/cmake --build build --parallel 2
       - name: Run CPU correctness checks
         run: /opt/ci-tools/bin/ctest --test-dir build --output-on-failure
