@@ -58,6 +58,8 @@ Save the benchmark output and profiler report with the GPU model, driver, CUDA v
 
 ## Correctness and limits
 
+CI has separate CPU reference and CUDA compilation jobs. The CUDA job uses a CUDA 12.6 development container and builds both the correctness executable and optional NVBench harness for SM 75 without running GPU code. A successful compilation confirms toolchain compatibility; GPU numerical correctness and performance require an actual NVIDIA device. Runtime checks reject non-finite output errors as failures.
+
 The reduction currently uses one block. This makes its output deterministic and avoids a reset or global atomic in the timed path, but it is a baseline rather than a scalable strategy for very large vectors.
 
 The CPU-only test validates the scalar references and non-square, odd-sized inputs. The CUDA executable independently compares device output with those references. CUDA results have not been measured on a GPU in the development environment when no NVIDIA device is available; do not infer GPU speedups from the CPU tests. This is an educational kernel study, not a production library.

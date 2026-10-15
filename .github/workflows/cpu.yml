@@ -15,3 +15,21 @@ jobs:
         run: cmake --build build --parallel
       - name: Check references
         run: ctest --test-dir build --output-on-failure
+
+  cuda-compile:
+    runs-on: ubuntu-24.04
+    container: nvidia/cuda:12.6.3-devel-ubuntu24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build tools
+        run: |
+          apt-get update
+          apt-get install -y git g++ python3-venv
+          python3 -m venv /opt/ci-tools
+          /opt/ci-tools/bin/pip install cmake==3.31.6 ninja
+      - name: Compile CUDA and NVBench without a GPU
+        run: |
+          /opt/ci-tools/bin/cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=75 -DCUDA_BACKEND=ON -DENABLE_NVBENCH=ON
+          /opt/ci-tools/bin/cmake --build build --parallel 2
+      - name: Run CPU correctness checks
+        run: /opt/ci-tools/bin/ctest --test-dir build --output-on-failure
