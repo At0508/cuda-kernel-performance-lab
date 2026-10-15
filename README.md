@@ -54,7 +54,13 @@ Change `86` to the target GPU's compute capability. NVBench sweeps matrix dimens
 ncu --set basic -o kernel_profile ./build-nvbench/nvbench_kernels
 ```
 
-Save the benchmark output and profiler report with the GPU model, driver, CUDA version, compiler flags, and command. No GPU result is included until run on a supported NVIDIA GPU.
+Save the benchmark output and profiler report with the GPU model, driver, CUDA version, compiler flags, and command. Recorded T4 measurements are linked below.
+
+## Recorded GPU results
+
+On a Tesla T4 in Colab, all three device/reference checks passed: tiled matrix multiplication, one-million-element reduction, and stable row softmax. Their mean CUDA-event timings were **11.994 µs, 1314.532 µs and 13.862 µs**, respectively. These are different operations and shapes, not comparable speedups.
+
+NVBench produced batched timings for all 15 workload configurations. Most cold measurements failed its clock/convergence checks on the shared host; the full warnings and raw results are retained. See the [GPU report, limitations and reproduction commands](docs/results/t4_report_2026-10-15.md). The one-block reduction remains a performance baseline with a clear scaling bottleneck.
 
 ## Correctness and limits
 
@@ -62,7 +68,7 @@ CI has separate CPU reference and CUDA compilation jobs. The CUDA job uses a CUD
 
 The reduction currently uses one block. This makes its output deterministic and avoids a reset or global atomic in the timed path, but it is a baseline rather than a scalable strategy for very large vectors.
 
-The CPU-only test validates the scalar references and non-square, odd-sized inputs. The CUDA executable independently compares device output with those references. CUDA results have not been measured on a GPU in the development environment when no NVIDIA device is available; do not infer GPU speedups from the CPU tests. This is an educational kernel study, not a production library.
+The CPU-only test validates the scalar references and non-square, odd-sized inputs. The CUDA executable independently compares device output with those references. The recorded GPU checks cover the stated inputs, not every possible shape. Do not infer GPU speedups from CPU tests or compare timings without matching workloads. This is an educational kernel study, not a production library.
 
 ## Layout
 

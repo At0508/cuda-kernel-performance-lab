@@ -1,0 +1,10 @@
+# device,Tesla T4
+# driver_version,13000
+# runtime_version,13000
+# compute_capability,7.5
+# warmup,20
+# repetitions,100
+operation,shape,mean_kernel_us,max_abs_error,check
+matmul,97x73x111,11.994,2.861e-06,PASS
+sum,1048576,1314.532,3.052e-04,PASS
+row_softmax,257x513,13.862,7.451e-09,PASS

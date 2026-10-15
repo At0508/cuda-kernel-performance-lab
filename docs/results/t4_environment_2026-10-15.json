@@ -1,0 +1,27 @@
+{
+  "created_at_utc": "2026-10-15T15:09:34.473692+00:00",
+  "gpu": "Tesla T4",
+  "compute_capability": [
+    7,
+    5
+  ],
+  "torch": "2.11.0+cu130",
+  "cuda_runtime": "13.0",
+  "cuda_source_commit": "a545c91707879423490ff5b66b6ce053bdd9ffc1",
+  "inference_source_commit": "318a9e183f44b56cc5ca2468edbd8c31752c604e",
+  "nvidia_smi": "Thu Oct 15 15:09:34 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.82.07              Driver Version: 580.82.07      CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  Tesla T4                       Off |   00000000:00:04.0 Off |                    0 |\n| N/A   48C    P0             36W /   70W |       3MiB /  15360MiB |     82%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|  No running processes found                                                             |\n+-----------------------------------------------------------------------------------------+\n",
+  "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0\n",
+  "nvbench_command": [
+    "./build/nvbench_kernels",
+    "--min-time",
+    "0.1",
+    "--batch-target-time",
+    "0.1",
+    "--timeout",
+    "5",
+    "--json",
+    "/content/nvidia-portfolio/t4_nvbench.json",
+    "--csv",
+    "/content/nvidia-portfolio/t4_nvbench.csv"
+  ]
+}
