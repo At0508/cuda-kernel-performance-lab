@@ -33,10 +33,13 @@ if(CUDA_BACKEND)
       set(NVBench_ENABLE_EXAMPLES OFF CACHE BOOL "" FORCE)
       set(NVBench_ENABLE_EXECUTABLES OFF CACHE BOOL "" FORCE)
       set(NVBench_ENABLE_INSTALL_RULES OFF CACHE BOOL "" FORCE)
+      # Pin the transitive build helper as well as NVBench itself. Following
+      # a development branch can silently raise the required CMake version.
+      set(rapids-cmake-sha edc8773f660e15fa2948324df5dc1a1bb7d9d1cc
+          CACHE STRING "RAPIDS-CMake v25.12.00 commit")
       FetchContent_Declare(nvbench
         GIT_REPOSITORY https://github.com/NVIDIA/nvbench.git
-        GIT_TAG python-0.3.0
-        GIT_SHALLOW TRUE)
+        GIT_TAG deb95d3da687fb1e57ba65364210e354aa67198c)
       FetchContent_MakeAvailable(nvbench)
       add_executable(nvbench_kernels src/nvbench_kernels.cu src/cuda_kernels.cu)
       target_link_libraries(nvbench_kernels PRIVATE nvbench::main)

@@ -39,7 +39,7 @@ The benchmark emits CSV rows for operation, shape, average CUDA-event latency, m
 
 ### NVBench sweeps
 
-NVBench is optional and fetched from NVIDIA's public repository at the `python-0.3.0` tag. It requires CMake 3.30.4+, CUDA Toolkit 12+, and an NVIDIA GPU for measurements. Set the CUDA architecture to match the device you will run on:
+NVBench is optional and fetched from NVIDIA's public repository at commit `deb95d3da687fb1e57ba65364210e354aa67198c` (the `python-0.3.0` release). Its RAPIDS-CMake helper is pinned to `edc8773f660e15fa2948324df5dc1a1bb7d9d1cc` (v25.12.00) to avoid changes from a moving dependency branch. It requires CMake 3.30.4+, CUDA Toolkit 12+, and an NVIDIA GPU for measurements. Set the CUDA architecture to match the device you will run on:
 
 ```sh
 cmake -S . -B build-nvbench -DCMAKE_BUILD_TYPE=Release \
