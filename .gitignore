@@ -1,0 +1,5 @@
+/build/
+*.csv
+*.log
+*.nsys-rep
+*.ncu-rep

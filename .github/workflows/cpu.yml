@@ -1,0 +1,17 @@
+name: CPU reference checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  cpu-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure CPU-only build
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCUDA_BACKEND=OFF
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Check references
+        run: ctest --test-dir build --output-on-failure
